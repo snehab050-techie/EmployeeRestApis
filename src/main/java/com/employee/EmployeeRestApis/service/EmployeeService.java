@@ -18,4 +18,25 @@ public class EmployeeService {
 
         return emps;
     }
+
+    public Employee getEmployeeById(int id){
+
+        Employee emp;
+
+        switch (id){
+            case 101:
+                emp = new Employee(101,"Sneha","IT",80000);
+                break;
+            case 102:
+                emp = new Employee(102,"Suhas","ME",75000);
+                break;
+            case 103:
+                emp = new Employee(103,"Janu","Cooking",67000);
+                break;
+            default:
+                emp = new Employee(0,null,null,0);
+                break;
+        }
+        return emp;
+    }
 }
