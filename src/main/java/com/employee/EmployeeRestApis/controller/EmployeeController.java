@@ -39,4 +39,15 @@ public class EmployeeController {
     public Employee createEmployee(@RequestBody Employee employee){
         return employeeService.createEmployee(employee);
     }
+
+    // http://localhost:8080/employees/103
+    @PutMapping("/{id}")
+    public int updateEmployeeById(@PathVariable int id, @RequestBody Employee employee){
+        return employeeService.updateEmployeeById(id, employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteEmpById(@PathVariable int id){
+        return employeeService.deleteEmpById(id);
+    }
 }

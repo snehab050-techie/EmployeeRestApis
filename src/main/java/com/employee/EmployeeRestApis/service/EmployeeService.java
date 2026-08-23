@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
+    // Method Get all employees
     public List<Employee> getAllEmployees(){
 
         List<Employee> emps = new ArrayList<>();
@@ -21,6 +22,7 @@ public class EmployeeService {
         return emps;
     }
 
+    // Method to fetch employee details by id
     public Employee getEmployeeById(int id){
 
         Employee emp;
@@ -42,6 +44,7 @@ public class EmployeeService {
         return emp;
     }
 
+    // Method to search employee by dept
     public List<Employee> getEmployeeByDept(String department){
 
         List<Employee> deptWiseList;
@@ -57,8 +60,26 @@ public class EmployeeService {
         return deptWiseList;
     }
 
+    // Method to create new employee
     public Employee createEmployee(Employee employee){
 
         return new Employee(employee.getId(),employee.getName(),employee.getDept(),employee.getSalary());
+    }
+
+    // Method to update existing employee by id
+    public int updateEmployeeById(int id, Employee employee){
+
+        Employee emp = switch (id) {
+            case 101, 102, 103 ->
+                    new Employee(employee.getId(), employee.getName(), employee.getDept(), employee.getSalary());
+            default -> new Employee(0, null, null, 0);
+        };
+        return emp.getId();
+    }
+
+    // Method to delete emp by id
+    public String deleteEmpById(int id){
+        String res = "Employee deleted with id: "+id;
+        return res;
     }
 }
