@@ -2,6 +2,7 @@ package com.employee.EmployeeRestApis.controller;
 
 import com.employee.EmployeeRestApis.entity.Employee;
 import com.employee.EmployeeRestApis.service.EmployeeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,14 +41,23 @@ public class EmployeeController {
 
     // http://localhost:8080/employees/search?department=Cooking
     @GetMapping("/search")
-    public List<Employee> getEmployeeByDept(@RequestParam String department){
-        return employeeService.getEmployeeByDept(department);
+    public ResponseEntity<List<Employee>> getEmployeeByDept(@RequestParam String department){
+
+        List<Employee> employeeList = employeeService.getEmployeeByDept(department);
+        if(employeeList.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(employeeList);
     }
 
     // http://localhost:8080/employees
     @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee){
-        return employeeService.createEmployee(employee);
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
+
+        Employee createdEmployee = employeeService.createEmployee(employee);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(employee);
     }
 
     // http://localhost:8080/employees/103
