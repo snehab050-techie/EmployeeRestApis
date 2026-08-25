@@ -19,8 +19,11 @@ public class EmployeeController {
 
     // http://localhost:8080/employees
     @GetMapping
-    public List<Employee> getAllEmployees(){
-        return employeeService.getAllEmployees();
+    public ResponseEntity<List<Employee>> getAllEmployees(){
+
+//        List<Employee> employeeList = employeeService.getAllEmployees();
+//        return ResponseEntity.ok(employeeList);
+        return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
     // http://localhost:8080/employees/101
