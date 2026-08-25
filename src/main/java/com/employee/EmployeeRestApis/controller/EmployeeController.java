@@ -2,6 +2,7 @@ package com.employee.EmployeeRestApis.controller;
 
 import com.employee.EmployeeRestApis.entity.Employee;
 import com.employee.EmployeeRestApis.service.EmployeeService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +25,14 @@ public class EmployeeController {
 
     // http://localhost:8080/employees/101
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable int id){
-        return employeeService.getEmployeeById(id);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable int id){
+
+        Employee employee = employeeService.getEmployeeById(id);
+
+        if(employee == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(employee);
     }
 
     // http://localhost:8080/employees/search?department=Cooking

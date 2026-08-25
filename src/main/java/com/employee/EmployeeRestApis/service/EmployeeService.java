@@ -1,6 +1,7 @@
 package com.employee.EmployeeRestApis.service;
 
 import com.employee.EmployeeRestApis.entity.Employee;
+import com.employee.EmployeeRestApis.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,21 +12,29 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
+    private final EmployeeRepository employeeRepository;
+
+    public EmployeeService(EmployeeRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+    }
+
     // Method Get all employees
     public List<Employee> getAllEmployees(){
 
-        List<Employee> emps = new ArrayList<>();
+       /* List<Employee> emps = new ArrayList<>();
         emps.add(new Employee(101,"Sneha","IT",80000));
         emps.add(new Employee(102,"Suhas","ME",75000));
         emps.add(new Employee(103,"Janu","Cooking",67000));
 
-        return emps;
+        return emps;*/
+
+        return employeeRepository.findALl();
     }
 
     // Method to fetch employee details by id
     public Employee getEmployeeById(int id){
 
-        Employee emp;
+        /*Employee emp;
 
         switch (id){
             case 101:
@@ -41,7 +50,9 @@ public class EmployeeService {
                 emp = new Employee(0,null,null,0);
                 break;
         }
-        return emp;
+        return emp;*/
+
+        return employeeRepository.findById(id);
     }
 
     // Method to search employee by dept
