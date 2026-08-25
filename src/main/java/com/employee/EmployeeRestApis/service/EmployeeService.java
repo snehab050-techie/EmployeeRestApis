@@ -89,8 +89,7 @@ public class EmployeeService {
     }
 
     // Method to delete emp by id
-    public String deleteEmpById(int id){
+    public void deleteEmpById(int id){
         String res = "Employee deleted with id: "+id;
-        return res;
     }
 }

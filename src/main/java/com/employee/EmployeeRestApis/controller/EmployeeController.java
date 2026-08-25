@@ -62,12 +62,15 @@ public class EmployeeController {
 
     // http://localhost:8080/employees/103
     @PutMapping("/{id}")
-    public int updateEmployeeById(@PathVariable int id, @RequestBody Employee employee){
-        return employeeService.updateEmployeeById(id, employee);
+    public ResponseEntity<Integer> updateEmployeeById(@PathVariable int id, @RequestBody Employee employee){
+        Integer empId = employeeService.updateEmployeeById(id, employee);
+        return ResponseEntity.ok(empId);
     }
 
+    // http://localhost:8080/employees/101
     @DeleteMapping("/{id}")
-    public String deleteEmpById(@PathVariable int id){
-        return employeeService.deleteEmpById(id);
+    public ResponseEntity<Void> deleteEmpById(@PathVariable int id){
+        employeeService.deleteEmpById(id);
+        return ResponseEntity.noContent().build();
     }
 }
