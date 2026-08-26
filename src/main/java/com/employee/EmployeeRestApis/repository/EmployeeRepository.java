@@ -45,4 +45,13 @@ public class EmployeeRepository {
 
         return employees.get(id);
     }
+
+    public Employee save(Employee employee){
+        employees.put(employee.getId(),employee);
+        return employee;
+    }
+
+    public void deleteById(Integer id){
+        employees.remove(id);
+    }
 }
