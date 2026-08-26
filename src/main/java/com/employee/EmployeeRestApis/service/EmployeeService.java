@@ -80,7 +80,9 @@ public class EmployeeService {
     // Method to create new employee
     public Employee createEmployee(Employee employee){
 
-        return new Employee(employee.getId(),employee.getName(),employee.getDept(),employee.getSalary());
+//        return new Employee(employee.getId(),employee.getName(),employee.getDept(),employee.getSalary());
+
+        return employeeRepository.save(employee);
     }
 
     // Method to update existing employee by id
