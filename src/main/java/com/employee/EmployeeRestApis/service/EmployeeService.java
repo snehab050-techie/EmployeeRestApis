@@ -52,7 +52,13 @@ public class EmployeeService {
         }
         return emp;*/
 
-        return employeeRepository.findById(id);
+//        return employeeRepository.findById(id);
+
+        Employee employee = employeeRepository.findById(id);
+        if(employee == null){
+            //throw new EmployeeNotFoundException("Employee not found with id: "+id);
+        }
+        return employee;
     }
 
     // Method to search employee by dept
