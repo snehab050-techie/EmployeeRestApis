@@ -3,25 +3,46 @@ package com.employee.EmployeeRestApis.repository;
 import com.employee.EmployeeRestApis.entity.Employee;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class EmployeeRepository {
 
-   public List<Employee> findALl(){
+    private final Map<Integer,Employee> employees = new HashMap<>();
 
-       //temporary data
-        return List.of(
-                new Employee(101,"Sneha","IT",80000),
-                new Employee(102,"Suhas","ME",75000),
-                new Employee(103,"Janu","Cooking",65000)
+    public EmployeeRepository(){
+        employees.put(
+                101,
+                new Employee(101,"Sneha","IT",85000)
+        );
+
+        employees.put(
+                102,
+                new Employee(102,"Suhas","ME",75000)
         );
     }
 
+   public List<Employee> findALl(){
+
+       //temporary data
+       /* return List.of(
+                new Employee(101,"Sneha","IT",80000),
+                new Employee(102,"Suhas","ME",75000),
+                new Employee(103,"Janu","Cooking",65000)
+        );*/
+
+       return new ArrayList<>(employees.values());
+    }
+
     public Employee findById(int id){
-        return findALl().stream()
+        /*return findALl().stream()
                 .filter(emp -> emp.getId() == id)
                 .findFirst()
-                .orElse(null);
+                .orElse(null);*/
+
+        return employees.get(id);
     }
 }
