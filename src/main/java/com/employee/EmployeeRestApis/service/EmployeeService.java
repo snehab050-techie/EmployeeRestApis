@@ -108,6 +108,13 @@ public class EmployeeService {
 
     // Method to delete emp by id
     public void deleteEmpById(int id){
-        String res = "Employee deleted with id: "+id;
+
+//        String res = "Employee deleted with id: "+id;
+
+        Employee employee = employeeRepository.findById(id);
+        if(employee == null){
+            throw new EmployeeNotFoundException("Employee not found with id: "+id);
+        }
+        employeeRepository.deleteById(id);
     }
 }
