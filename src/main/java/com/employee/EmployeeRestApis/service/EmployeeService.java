@@ -87,14 +87,23 @@ public class EmployeeService {
     }
 
     // Method to update existing employee by id
-    public int updateEmployeeById(int id, Employee employee){
+    public Employee updateEmployeeById(int id, Employee employee){
 
-        Employee emp = switch (id) {
+       /* Employee emp = switch (id) {
             case 101, 102, 103 ->
                     new Employee(employee.getId(), employee.getName(), employee.getDept(), employee.getSalary());
             default -> new Employee(0, null, null, 0);
         };
-        return emp.getId();
+        return emp.getId();*/
+
+        Employee foundEmp = employeeRepository.findById(id);
+        if(foundEmp == null){
+            throw new EmployeeNotFoundException("Employee not found with id: "+id);
+        }
+
+        employee.setId(id);
+
+        return employeeRepository.save(employee);
     }
 
     // Method to delete emp by id

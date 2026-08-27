@@ -62,9 +62,9 @@ public class EmployeeController {
 
     // http://localhost:8080/employees/103
     @PutMapping("/{id}")
-    public ResponseEntity<Integer> updateEmployeeById(@PathVariable int id, @RequestBody Employee employee){
-        Integer empId = employeeService.updateEmployeeById(id, employee);
-        return ResponseEntity.ok(empId);
+    public ResponseEntity<Employee> updateEmployeeById(@PathVariable int id, @RequestBody Employee employee){
+        Employee updatedEmployee = employeeService.updateEmployeeById(id, employee);
+        return ResponseEntity.ok(updatedEmployee);
     }
 
     // http://localhost:8080/employees/101
