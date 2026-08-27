@@ -1,6 +1,7 @@
 package com.employee.EmployeeRestApis.service;
 
 import com.employee.EmployeeRestApis.entity.Employee;
+import com.employee.EmployeeRestApis.exception.EmployeeNotFoundException;
 import com.employee.EmployeeRestApis.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,7 @@ public class EmployeeService {
 
         Employee employee = employeeRepository.findById(id);
         if(employee == null){
-            //throw new EmployeeNotFoundException("Employee not found with id: "+id);
+            throw new EmployeeNotFoundException("Employee not found with id: "+id);
         }
         return employee;
     }
