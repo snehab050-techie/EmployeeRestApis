@@ -1,6 +1,7 @@
 package com.employee.EmployeeRestApis.controller;
 
 import com.employee.EmployeeRestApis.entity.Employee;
+import com.employee.EmployeeRestApis.exception.EmployeeNotFoundException;
 import com.employee.EmployeeRestApis.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +34,11 @@ public class EmployeeController {
 
         Employee employee = employeeService.getEmployeeById(id);
 
-        if(employee == null){
-            return ResponseEntity.notFound().build();
-        }
+        //No need call method here. Spring will handle the exception by throwing 404
+//        if(employee == null){
+////            return ResponseEntity.notFound().build();
+//            this.handleEmployeeNotFoundException(new EmployeeNotFoundException(""));
+//        }
         return ResponseEntity.ok(employee);
     }
 
@@ -72,5 +75,12 @@ public class EmployeeController {
     public ResponseEntity<Void> deleteEmpById(@PathVariable int id){
         employeeService.deleteEmpById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(EmployeeNotFoundException.class)
+    public ResponseEntity<String> handleEmployeeNotFoundException(EmployeeNotFoundException employeeNotFoundException){
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(employeeNotFoundException.getMessage());
     }
 }
