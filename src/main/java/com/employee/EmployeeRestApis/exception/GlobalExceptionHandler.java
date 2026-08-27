@@ -22,6 +22,20 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(errorResponse);
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleGenericException(Exception exception){
+
+        ErrorResponse errorResponse = new ErrorResponse(
+                500,
+                    exception.getMessage(),
+                    LocalDateTime.now().toString()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(errorResponse);
+    }
 }
 
 /*Now the response to client is:

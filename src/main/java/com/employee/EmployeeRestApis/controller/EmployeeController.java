@@ -60,7 +60,7 @@ public class EmployeeController {
         Employee createdEmployee = employeeService.createEmployee(employee);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(employee);
+                .body(createdEmployee);
     }
 
     // http://localhost:8080/employees/103
