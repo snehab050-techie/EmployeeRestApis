@@ -77,10 +77,14 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-    @ExceptionHandler(EmployeeNotFoundException.class)
+    // Not recommended - as it's repetitive for other controller classes as well
+    // Instead we can handle all these exceptions globally using @ControllerAdvice
+    // So, We want one place to handle exceptions across the whole application.
+
+    /*@ExceptionHandler(EmployeeNotFoundException.class)
     public ResponseEntity<String> handleEmployeeNotFoundException(EmployeeNotFoundException employeeNotFoundException){
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(employeeNotFoundException.getMessage());
-    }
+    }*/
 }
