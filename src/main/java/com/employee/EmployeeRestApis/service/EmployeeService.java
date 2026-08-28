@@ -65,17 +65,7 @@ public class EmployeeService {
     // Method to search employee by dept
     public List<Employee> getEmployeeByDept(String department){
 
-        List<Employee> deptWiseList;
-
-        if(department.equals("IT")){
-            deptWiseList = Arrays.asList(new Employee(101,"Sneha","IT",80000));
-        } else if (department.equals("ME")) {
-            deptWiseList = Arrays.asList(new Employee(102,"Suhas","ME",75000));
-        }
-        else{
-            deptWiseList = Arrays.asList(new Employee(103,"Janu","Cooking",67000));
-        }
-        return deptWiseList;
+        return employeeRepository.findEmployeesByDept(department);
     }
 
     // Method to create new employee

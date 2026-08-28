@@ -46,6 +46,16 @@ public class EmployeeRepository {
         return employees.get(id);
     }
 
+
+    public List<Employee> findEmployeesByDept(String dept){
+
+        return employees
+                .values()
+                .stream()
+                .filter(emp -> emp.getDept().equals(dept))
+                .toList();
+    }
+
     public Employee save(Employee employee){
         employees.put(employee.getId(),employee);
         return employee;
