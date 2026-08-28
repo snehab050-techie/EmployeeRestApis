@@ -3,6 +3,7 @@ package com.employee.EmployeeRestApis.controller;
 import com.employee.EmployeeRestApis.entity.Employee;
 import com.employee.EmployeeRestApis.exception.EmployeeNotFoundException;
 import com.employee.EmployeeRestApis.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,7 @@ public class EmployeeController {
 
     // http://localhost:8080/employees
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee){
 
         Employee createdEmployee = employeeService.createEmployee(employee);
         return ResponseEntity
