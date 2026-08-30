@@ -6,13 +6,10 @@ public class Employee {
 
     private int id;
 
-    @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @NotBlank(message = "Department cannot be blank")
     private String dept;
 
-    @Positive(message = "Salary must be greater than 0")
     private int salary;
 
     public int getId() {
