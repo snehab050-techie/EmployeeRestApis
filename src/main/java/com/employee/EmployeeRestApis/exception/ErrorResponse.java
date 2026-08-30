@@ -1,12 +1,14 @@
 package com.employee.EmployeeRestApis.exception;
 
+import java.time.LocalDateTime;
+
 public class ErrorResponse {
 
     private int status;
     private String message;
-    private String timestamp;
+    private LocalDateTime timestamp;
 
-    public ErrorResponse(int status, String message, String timestamp) {
+    public ErrorResponse(int status, String message, LocalDateTime timestamp) {
         this.status = status;
         this.message = message;
         this.timestamp = timestamp;
@@ -28,11 +30,11 @@ public class ErrorResponse {
         this.message = message;
     }
 
-    public String getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 }

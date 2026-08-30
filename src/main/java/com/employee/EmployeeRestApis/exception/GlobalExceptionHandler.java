@@ -5,19 +5,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
 
-@ControllerAdvice
+//@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(EmployeeNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleEmployeeNotFoundException(EmployeeNotFoundException employeeNotFoundException){
 
         ErrorResponse errorResponse = new ErrorResponse(
-                404,
+                HttpStatus.NOT_FOUND.value(),
                 employeeNotFoundException.getMessage(),
-                LocalDateTime.now().toString()
+                LocalDateTime.now()
         );
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
@@ -28,9 +30,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleGenericException(Exception exception){
 
         ErrorResponse errorResponse = new ErrorResponse(
-                500,
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
                     exception.getMessage(),
-                    LocalDateTime.now().toString()
+                    LocalDateTime.now()
         );
 
         return ResponseEntity
@@ -42,9 +44,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
 
         ErrorResponse errorResponse = new ErrorResponse(
-                400,
+                HttpStatus.NO_CONTENT.value(),
                 e.getMessage(),
-                LocalDateTime.now().toString()
+                LocalDateTime.now()
         );
 
         return ResponseEntity
