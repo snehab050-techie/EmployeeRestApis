@@ -1,5 +1,7 @@
 package com.employee.EmployeeRestApis.controller;
 
+import com.employee.EmployeeRestApis.dto.EmployeeRequest;
+import com.employee.EmployeeRestApis.dto.EmployeeResponse;
 import com.employee.EmployeeRestApis.entity.Employee;
 import com.employee.EmployeeRestApis.exception.EmployeeNotFoundException;
 import com.employee.EmployeeRestApis.service.EmployeeService;
@@ -56,9 +58,9 @@ public class EmployeeController {
 
     // http://localhost:8080/employees
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee){
+    public ResponseEntity<EmployeeResponse> createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
 
-        Employee createdEmployee = employeeService.createEmployee(employee);
+        EmployeeResponse createdEmployee = employeeService.createEmployee(employeeRequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(createdEmployee);

@@ -1,5 +1,7 @@
 package com.employee.EmployeeRestApis.service;
 
+import com.employee.EmployeeRestApis.dto.EmployeeRequest;
+import com.employee.EmployeeRestApis.dto.EmployeeResponse;
 import com.employee.EmployeeRestApis.entity.Employee;
 import com.employee.EmployeeRestApis.exception.EmployeeNotFoundException;
 import com.employee.EmployeeRestApis.repository.EmployeeRepository;
@@ -69,11 +71,22 @@ public class EmployeeService {
     }
 
     // Method to create new employee
-    public Employee createEmployee(Employee employee){
+    public EmployeeResponse createEmployee(EmployeeRequest employeeRequest){
 
 //        return new Employee(employee.getId(),employee.getName(),employee.getDept(),employee.getSalary());
+        Employee employee = new Employee();
 
-        return employeeRepository.save(employee);
+        employee.setName(employeeRequest.getName());
+        employee.setDept(employeeRequest.getDept());
+        employee.setSalary(employeeRequest.getSalary());
+
+        Employee savedEmployee = employeeRepository.save(employee);
+
+        return new EmployeeResponse(
+                savedEmployee.getId(),
+                savedEmployee.getName(),
+                savedEmployee.getDept(),
+                savedEmployee.getSalary());
     }
 
     // Method to update existing employee by id

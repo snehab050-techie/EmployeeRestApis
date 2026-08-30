@@ -47,6 +47,9 @@ public class Employee {
         this.dept = dept;
     }
 
+    public Employee() {
+    }
+
     public Employee(int id, String name, String dept, int salary) {
         this.id = id;
         this.name = name;
