@@ -57,7 +57,14 @@ public class EmployeeRepository {
     }
 
     public Employee save(Employee employee){
-        employees.put(employee.getId(),employee);
+
+        //created this to save valid ids to our in-memory db - map
+        int newId = employees.keySet()
+                        .stream()
+                                .max(Integer::compareTo)
+                                        .orElse(100)+1;
+        employee.setId(newId);
+        employees.put(newId,employee);
         return employee;
     }
 
