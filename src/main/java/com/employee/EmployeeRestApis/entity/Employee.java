@@ -1,9 +1,14 @@
 package com.employee.EmployeeRestApis.entity;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
+@Entity
+@Table(name = "EMPLOYEE_DETAILS")
 public class Employee {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
