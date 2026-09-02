@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
 @Entity
-@Table(name = "EMPLOYEE_DETAILS")
+@Table(name = "employees")
 public class Employee {
 
     @Id
