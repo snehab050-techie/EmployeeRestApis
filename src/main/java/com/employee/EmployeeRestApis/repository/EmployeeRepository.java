@@ -1,3 +1,8 @@
+//We don't need this class aymore..
+// As we are directly working with employee repo interface which is extedning JPA repository
+// Spring Data Jpa will provide these below methods for us
+
+/*
 package com.employee.EmployeeRestApis.repository;
 
 import com.employee.EmployeeRestApis.entity.Employee;
@@ -9,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class EmployeeRepository {
+public class EmployeeRepository{
 
     private final Map<Integer,Employee> employees = new HashMap<>();
 
@@ -28,20 +33,24 @@ public class EmployeeRepository {
    public List<Employee> findALl(){
 
        //temporary data
-       /* return List.of(
+       */
+/* return List.of(
                 new Employee(101,"Sneha","IT",80000),
                 new Employee(102,"Suhas","ME",75000),
                 new Employee(103,"Janu","Cooking",65000)
-        );*/
+        );*//*
+
 
        return new ArrayList<>(employees.values());
     }
 
     public Employee findById(int id){
-        /*return findALl().stream()
+        */
+/*return findALl().stream()
                 .filter(emp -> emp.getId() == id)
                 .findFirst()
-                .orElse(null);*/
+                .orElse(null);*//*
+
 
         return employees.get(id);
     }
@@ -56,7 +65,8 @@ public class EmployeeRepository {
                 .toList();
     }
 
-    public Employee save(Employee employee){
+    */
+/*public Employee save(Employee employee){
 
         //created this to save valid ids to our in-memory db - map
         int newId = employees.keySet()
@@ -66,9 +76,13 @@ public class EmployeeRepository {
         employee.setId(newId);
         employees.put(newId,employee);
         return employee;
-    }
+    }*//*
+
+
+
 
     public void deleteById(Integer id){
         employees.remove(id);
     }
 }
+*/
