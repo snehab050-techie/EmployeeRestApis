@@ -4,21 +4,29 @@ import com.employee.EmployeeRestApis.dto.EmployeeRequest;
 import com.employee.EmployeeRestApis.dto.EmployeeResponse;
 import com.employee.EmployeeRestApis.entity.Employee;
 import com.employee.EmployeeRestApis.exception.EmployeeNotFoundException;
-import com.employee.EmployeeRestApis.repository.EmployeeRepository;
+import com.employee.EmployeeRestApis.repository.EmployeeRepoInterface;
+//import com.employee.EmployeeRestApis.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
 
-    private final EmployeeRepository employeeRepository;
+    // Commented out as no longer needed for CRUD implementations - all handled by JpaRepository now
+//    private final EmployeeRepository employeeRepository;
+//    public EmployeeService(EmployeeRepository employeeRepository){
+//        this.employeeRepository = employeeRepository;
+//    }
 
-    public EmployeeService(EmployeeRepository employeeRepository){
-        this.employeeRepository = employeeRepository;
+    private final EmployeeRepoInterface employeeRepoInterface;
+
+    public EmployeeService(EmployeeRepoInterface employeeRepoInterface){
+        this.employeeRepoInterface = employeeRepoInterface;
     }
 
     // Method Get all employees
@@ -31,7 +39,8 @@ public class EmployeeService {
 
         return emps;*/
 
-        return employeeRepository.findALl();
+//        return employeeRepository.findALl();
+        return employeeRepoInterface.findAll();
     }
 
     // Method to fetch employee details by id
@@ -57,18 +66,23 @@ public class EmployeeService {
 
 //        return employeeRepository.findById(id);
 
-        Employee employee = employeeRepository.findById(id);
-        if(employee == null){
+/*       Employee employee = employeeRepository.findById(id);
+         if(employee == null){
             throw new EmployeeNotFoundException("Employee not found with id: "+id);
-        }
-        return employee;
+         }
+        return employee;*/
+
+        Employee foundEmployee = employeeRepoInterface.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id: "+id));
+        return foundEmployee;
     }
 
     // Method to search employee by dept
-    public List<Employee> getEmployeeByDept(String department){
+    // commenting for now as don't have method implementation for findEmployeesByDept
+    /*public List<Employee> getEmployeeByDept(String department){
 
-        return employeeRepository.findEmployeesByDept(department);
-    }
+       return employeeRepository.findEmployeesByDept(department);
+    }*/
 
     // Method to create new employee
     public EmployeeResponse createEmployee(EmployeeRequest employeeRequest){
@@ -80,8 +94,8 @@ public class EmployeeService {
         employee.setDept(employeeRequest.getDept());
         employee.setSalary(employeeRequest.getSalary());
 
-        Employee savedEmployee = employeeRepository.save(employee);
-
+//        Employee savedEmployee = employeeRepository.save(employee);
+         Employee savedEmployee = employeeRepoInterface.save(employee);
         return new EmployeeResponse(
                 savedEmployee.getId(),
                 savedEmployee.getName(),
@@ -99,14 +113,19 @@ public class EmployeeService {
         };
         return emp.getId();*/
 
-        Employee foundEmp = employeeRepository.findById(id);
+        /*Employee foundEmp = employeeRepository.findById(id);
         if(foundEmp == null){
             throw new EmployeeNotFoundException("Employee not found with id: "+id);
         }
 
+        employee.setId(id);*/
+
+        Employee foundEmployee = employeeRepoInterface.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id: "+id));
         employee.setId(id);
 
-        return employeeRepository.save(employee);
+//        return employeeRepository.save(employee);
+        return employeeRepoInterface.save(employee);
     }
 
     // Method to delete emp by id
@@ -114,10 +133,12 @@ public class EmployeeService {
 
 //        String res = "Employee deleted with id: "+id;
 
-        Employee employee = employeeRepository.findById(id);
+        /*Employee employee = employeeRepository.findById(id);
         if(employee == null){
             throw new EmployeeNotFoundException("Employee not found with id: "+id);
-        }
-        employeeRepository.deleteById(id);
+        }*/
+        Employee em = employeeRepoInterface.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id: "+id));
+        employeeRepoInterface.deleteById(em.getId());
     }
 }
