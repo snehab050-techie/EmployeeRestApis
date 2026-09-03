@@ -46,7 +46,7 @@ public class EmployeeController {
     }
 
     // http://localhost:8080/employees/search?department=Cooking
-    @GetMapping("/search")
+    /*@GetMapping("/search")
     public ResponseEntity<List<Employee>> getEmployeeByDept(@RequestParam String department){
 
         List<Employee> employeeList = employeeService.getEmployeeByDept(department);
@@ -54,7 +54,7 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(employeeList);
-    }
+    }*/
 
     // http://localhost:8080/employees
     @PostMapping
