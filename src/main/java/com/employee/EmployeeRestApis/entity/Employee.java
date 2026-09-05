@@ -13,7 +13,11 @@ public class Employee {
 
     private String name;
 
-    private String dept;
+//    private String dept;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     private int salary;
 
@@ -41,21 +45,21 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String getDept() {
-        return dept;
+    public Department getDept() {
+        return department;
     }
 
-    public void setDept(String dept) {
-        this.dept = dept;
+    public void setDept(Department dept) {
+        this.department = dept;
     }
 
     public Employee() {
     }
 
-    public Employee(int id, String name, String dept, int salary) {
+    public Employee(int id, String name, Department dept, int salary) {
         this.id = id;
         this.name = name;
-        this.dept = dept;
+        this.department = dept;
         this.salary = salary;
     }
 }
